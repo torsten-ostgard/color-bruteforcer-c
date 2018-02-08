@@ -308,10 +308,12 @@ void test_parse_colors_mismatched()
     fflush(stderr);
     CU_ASSERT_EQUAL(4, num_samples);
     CU_ASSERT_PTR_NULL(all_colors);
-    struct stat st;
-    stat(STDERR_FILE, &st);
-    int bytes_written = st.st_size;
-    CU_ASSERT_EQUAL(bytes_written, strlen(MISMATCHED_ERROR_MESSAGE));
+
+    char buf[100];
+    fclose(err_file);
+    err_file = fopen(STDERR_FILE, "r");
+    fgets(buf, 100, err_file);
+    CU_ASSERT_STRING_EQUAL(MISMATCHED_ERROR_MESSAGE, buf);
 
     fclose(test_file);
     fclose(null_file);
@@ -333,10 +335,12 @@ void test_parse_colors_invalid_color()
     fflush(stderr);
     CU_ASSERT_EQUAL(0, num_samples);
     CU_ASSERT_PTR_NULL(all_colors);
-    struct stat st;
-    stat(STDERR_FILE, &st);
-    int bytes_written = st.st_size;
-    CU_ASSERT_EQUAL(bytes_written, strlen(CONVERSION_ERROR_MESSAGE));
+
+    char buf[100];
+    fclose(err_file);
+    err_file = fopen(STDERR_FILE, "r");
+    fgets(buf, 100, err_file);
+    CU_ASSERT_STRING_EQUAL(CONVERSION_ERROR_MESSAGE, buf);
 
     fclose(test_file);
     fclose(null_file);
@@ -358,10 +362,12 @@ void test_parse_colors_read_failure()
     fflush(stderr);
     CU_ASSERT_EQUAL(1, num_samples);
     CU_ASSERT_PTR_NULL(all_colors);
-    struct stat st;
-    stat(STDERR_FILE, &st);
-    int bytes_written = st.st_size;
-    CU_ASSERT_EQUAL(bytes_written, strlen(READ_FAILURE_ERROR_MESSAGE));
+
+    char buf[100];
+    fclose(err_file);
+    err_file = fopen(STDERR_FILE, "r");
+    fgets(buf, 100, err_file);
+    CU_ASSERT_STRING_EQUAL(READ_FAILURE_ERROR_MESSAGE, buf);
 
     fclose(test_file);
     fclose(null_file);
