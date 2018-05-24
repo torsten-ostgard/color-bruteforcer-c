@@ -163,13 +163,15 @@ void test_color_to_hex_to_color()
 
 void test_parse_single_color()
 {
-    FILE *test_file = fopen("input_files/test_parse_single_color", "r");
+    FILE *test_file = fopen("test/input_files/test_parse_single_color", "r");
     stdin = test_file;
     FILE *null_file = fopen(NULL_OUTPUT, "w");
     stdout = null_file;
     size_t i = 1;
     int num_samples = 0;
     Color *color = malloc(sizeof(Color));
+    
+    if (color == NULL) { printf("OH NO!"); }
 
     int result = parse_single_color(i, &num_samples, color);
     CU_ASSERT_EQUAL(PARSE_SUCCESS, result);
@@ -185,7 +187,7 @@ void test_parse_single_color()
 
 void test_parse_single_color_windows()
 {
-    FILE *test_file = fopen("input_files/test_parse_single_color_windows", "r");
+    FILE *test_file = fopen("test/input_files/test_parse_single_color_windows", "r");
     stdin = test_file;
     FILE *null_file = fopen(NULL_OUTPUT, "w");
     stdout = null_file;
@@ -207,7 +209,7 @@ void test_parse_single_color_windows()
 
 void test_parse_single_color_empty_string()
 {
-    FILE *test_file = fopen("input_files/test_parse_single_color_empty_string", "r");
+    FILE *test_file = fopen("test/input_files/test_parse_single_color_empty_string", "r");
     stdin = test_file;
     FILE *null_file = fopen(NULL_OUTPUT, "w");
     stdout = null_file;
@@ -229,7 +231,7 @@ void test_parse_single_color_empty_string()
 
 void test_parse_single_color_invalid_color()
 {
-    FILE *test_file = fopen("input_files/test_parse_single_color_invalid_color", "r");
+    FILE *test_file = fopen("test/input_files/test_parse_single_color_invalid_color", "r");
     stdin = test_file;
     FILE *null_file = fopen(NULL_OUTPUT, "w");
     stdout = null_file;
@@ -251,7 +253,7 @@ void test_parse_single_color_invalid_color()
 
 void test_parse_colors()
 {
-    FILE *test_file = fopen("input_files/test_parse_colors", "r");
+    FILE *test_file = fopen("test/input_files/test_parse_colors", "r");
     stdin = test_file;
     FILE *null_file = fopen(NULL_OUTPUT, "w");
     stdout = null_file;
@@ -296,7 +298,7 @@ void test_parse_colors()
 
 void test_parse_colors_mismatched()
 {
-    FILE *test_file = fopen("input_files/test_parse_colors_mismatched", "r");
+    FILE *test_file = fopen("test/input_files/test_parse_colors_mismatched", "r");
     stdin = test_file;
     FILE *null_file = fopen(NULL_OUTPUT, "w");
     stdout = null_file;
@@ -323,7 +325,7 @@ void test_parse_colors_mismatched()
 
 void test_parse_colors_invalid_color()
 {
-    FILE *test_file = fopen("input_files/test_parse_colors_invalid_color", "r");
+    FILE *test_file = fopen("test/input_files/test_parse_colors_invalid_color", "r");
     stdin = test_file;
     FILE *null_file = fopen(NULL_OUTPUT, "w");
     stdout = null_file;
@@ -350,7 +352,7 @@ void test_parse_colors_invalid_color()
 
 void test_parse_colors_read_failure()
 {
-    FILE *test_file = fopen("input_files/test_parse_colors_read_failure", "r");
+    FILE *test_file = fopen("test/input_files/test_parse_colors_read_failure", "r");
     stdin = test_file;
     FILE *null_file = fopen(NULL_OUTPUT, "w");
     stdout = null_file;

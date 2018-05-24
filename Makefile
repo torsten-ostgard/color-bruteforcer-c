@@ -1,17 +1,35 @@
 CC = gcc
 CFLAGS = -fopenmp -std=c99 -O3 -ggdb -Wall -pedantic
+LDFLAGS = -lm
+SRCDIR = src
+TESTDIR = test
+INC = -I$(SRCDIR) -I$(TESTDIR)
+
+OBJS = color_bruteforcer.o argtable3.o
+TESTS = testcolorbruteforcer.o
+
 RM = rm -f
 
-all: color_bruteforcer
+color_bruteforcer: $(OBJS) main.o
+	$(CC) $(CFLAGS) -o $@ $^ $(INC) $(LDFLAGS)
 
-color_bruteforcer: color_bruteforcer.o argtable3.o main.o
-	$(CC) $(CFLAGS) -o $@ $^
+color_bruteforcer_tests: $(OBJS) $(TESTS) testall.o
+	$(CC) $(CFLAGS) -o $@ $^ $(INC) $(LDFLAGS) -lcunit
 
-main.o: main.c
+%.o: $(SRCDIR)/%.c
+	$(CC) $(CFLAGS) -c $^ -o $@ $(INC)
 
-color_bruteforcer.o: color_bruteforcer.c
+%.o: $(TESTDIR)/%.c
+	$(CC) $(CFLAGS) -c $< -o $@ $(INC)
 
-argtable3.o: argtable3.c
+.PHONY: test
+test: color_bruteforcer_tests
+	./$<
 
+.PHONY: all
+all: color_bruteforcer test
+
+.PHONY: clean
 clean:
-	$(RM) color_burteforcer *.o
+	$(RM) color_burteforcer color_bruteforcer_tests *.o
+
