@@ -1,5 +1,5 @@
-CC = gcc
-CFLAGS = -fopenmp -std=c99 -O3 -ggdb -Wall -pedantic
+CC ?= gcc
+CFLAGS ?= -fopenmp -std=c99 -O3 -ggdb -Wall -pedantic
 LDFLAGS = -lm
 SRCDIR = src
 TESTDIR = test

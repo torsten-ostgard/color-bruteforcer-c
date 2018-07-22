@@ -1,0 +1,20 @@
+language: c
+
+os:
+  - linux
+
+compiler:
+  - gcc
+
+env:
+  - OMP_NUM_THREADS=4 COVERAGE=no
+  - OMP_NUM_THREADS=4 COVERAGE=yes CFLAGS='-fopenmp -std=c99 --coverage -O0 -ggdb -Wall -pedantic'
+
+before_install:
+  - sudo apt-get update && sudo apt-get install -y cunit
+
+script:
+  - make test
+
+after_success:
+  - if [ "$COVERAGE" = "yes" ]; then cd ${SRCDIR} && bash <(curl -s https://codecov.io/bash); fi
