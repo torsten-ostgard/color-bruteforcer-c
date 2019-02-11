@@ -1,3 +1,5 @@
+This repository has been deprecated and exists only as a historical curiosity. A much improved version of the same tool written in Rust is available [here](https://github.com/torsten-ostgard/color-bruteforcer).
+
 # color_bruteforcer - Find an unknown, semitransparent overlay color
 
 
